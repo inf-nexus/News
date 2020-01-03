@@ -36,16 +36,6 @@ struct LoadableImage: View {
                 print("Error fetching image: ", error?.localizedDescription ?? "Unknown error")
             }
         }
-        
-        guard let url = URL(string: imageURLString) else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else { return }
-            
-            DispatchQueue.main.async {
-                self.data = data
-            }
-            
-        }.resume()
     }
 }
 
