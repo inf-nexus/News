@@ -28,16 +28,12 @@ struct ArticleCell: View {
                 
             Spacer()
                 
-            Image(systemName: "video")
-                .resizable()
-                .scaledToFit()
-                .frame(height: geo.size.height - 20)
+                LoadableImage(imageURLString: self.article.imgPath)
+                    .frame(height: geo.size.height - 20)
             }
             
         }
         .frame(height: 130)
-        .border(Color.red)
-        
         
     }
 }
