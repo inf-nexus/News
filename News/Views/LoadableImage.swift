@@ -17,12 +17,11 @@ struct LoadableImage: View {
         if data.isEmpty {
             return AnyView(Image(systemName: "photo")
             .resizable()
-            .scaledToFit()
             .onAppear(perform: loadImage))
         }
         return AnyView(Image(uiImage: UIImage(data: data)!)
             .resizable()
-            .scaledToFit())
+            )
     }
     
     func loadImage() {
