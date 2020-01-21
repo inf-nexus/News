@@ -21,7 +21,9 @@ struct LoadableImage: View {
                 .resizable()
                 .onAppear(perform: loadImage))
         } else {
-            return AnyView(loadedImage)
+            return AnyView(
+                loadedImage!.resizable(resizingMode: .stretch).interpolation(.none)
+            )
         }
         
     }

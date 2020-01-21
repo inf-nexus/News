@@ -20,7 +20,7 @@ struct Article: Identifiable, Codable {
     let description: String
     let url: String
     let urlToImage: String?
-//    let publishedAt: Date
+    let publishedAt: Date
     
     var wrappedAuthor: String {
         return author ?? "Unknown Author"

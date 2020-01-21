@@ -11,15 +11,6 @@ import SwiftUI
 struct ArticleCell: View {
     
     let article: Article
-    let geometry: GeometryProxy
-    
-    var cellHeight: CGFloat {
-        return geometry.size.height / 5
-    }
-    
-    var imageDimension: CGFloat {
-        return (geometry.size.height / 5) * 0.9
-    }
     
     var body: some View {
         
@@ -33,11 +24,16 @@ struct ArticleCell: View {
             }
                 
             Spacer()
+            
+            VStack {
+                Spacer()
+                LoadableImage(imageURLString: article.wrappedUrlToImage)
+                   .frame(width: 100, height: 100)
+                Spacer()
+            }
                 
-            LoadableImage(imageURLString: article.wrappedUrlToImage)
-                .frame(width: imageDimension, height: imageDimension)
+           
         }
-        .frame(height: cellHeight)
 
     }
 }
@@ -66,8 +62,6 @@ struct ArticleCell_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GeometryReader { geo in
-            ArticleCell(article: sampleArticle, geometry: geo)
-        }
+        ArticleCell(article: sampleArticle)
     }
 }

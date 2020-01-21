@@ -13,6 +13,7 @@ func decodeArticleJSONString(jsonString: String) -> Article? {
     let jsonData = jsonString.data(using: .utf8)!
     
     let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
     
     guard let article = try? decoder.decode(Article.self, from: jsonData) else { return nil }
     
@@ -22,7 +23,7 @@ func decodeArticleJSONString(jsonString: String) -> Article? {
 func decodeArticles(data: Data) -> [Article] {
     
     let decoder = JSONDecoder()
-    
+    decoder.dateDecodingStrategy = .iso8601
     
     guard let response = try? decoder.decode(Response.self, from: data) else {
         print("Failed to decode articles")

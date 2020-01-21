@@ -16,14 +16,19 @@ struct HomeView: View {
         
         NavigationView {
             
-            GeometryReader { geo in
                 
-                List(self.articles) { article in
-                   ArticleCell(article: article, geometry: geo)
-                }
-                
+            List(self.articles) { article in
+               ArticleCell(article: article)
             }
+            
             .navigationBarTitle(Text("News"))
+        }
+        .onAppear(perform: loadArticles)
+    }
+    
+    func loadArticles() {
+        fetchHeadlineArticles { articles in
+            self.articles = articles
         }
     }
 }

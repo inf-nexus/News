@@ -32,7 +32,7 @@ func fetchImage(urlString: String, callback: @escaping (Image) -> Void) {
             }
         }
         
-    }
+    }.resume()
 }
 
 func fetchHeadlineArticles(callback: @escaping ([Article]) -> Void) {
@@ -54,5 +54,5 @@ func fetchHeadlineArticles(callback: @escaping ([Article]) -> Void) {
                 callback([])
             }
         }
-    }
+    }.resume()
 }
