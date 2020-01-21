@@ -16,11 +16,25 @@ struct HomeView: View {
         
         NavigationView {
             
+            VStack {
                 
-            List(self.articles) { article in
-               ArticleCell(article: article)
-            }
+                List {
+                    
+                    ForEach(self.articles) { article in
+                        ArticleCell(article: article)
+                    }
+                    
+                    HStack() {
+                        Spacer()
+                        Text("Powered by News API")
+                            .bold()
+                        Spacer()
+                    }
+
+                }
+                
             
+            }
             .navigationBarTitle(Text("News"))
         }
         .onAppear(perform: loadArticles)

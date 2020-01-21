@@ -11,6 +11,8 @@ import SwiftUI
 struct LoadableImage: View {
     
     let imageURLString: String
+    var width: CGFloat = 100
+    var height: CGFloat = 100
     
     @State var loadedImage: Image?
     
@@ -19,10 +21,19 @@ struct LoadableImage: View {
         if loadedImage == nil {
             return AnyView(Image(systemName: "photo")
                 .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: width, height: height)
+                .clipped()
+                .cornerRadius(5)
                 .onAppear(perform: loadImage))
         } else {
             return AnyView(
-                loadedImage!.resizable(resizingMode: .stretch).interpolation(.none)
+                loadedImage!
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: width, height: height)
+                    .clipped()
+                    .cornerRadius(5)
             )
         }
         

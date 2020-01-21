@@ -27,8 +27,7 @@ struct ArticleCell: View {
             
             VStack {
                 Spacer()
-                LoadableImage(imageURLString: article.wrappedUrlToImage)
-                   .frame(width: 100, height: 100)
+                LoadableImage(imageURLString: article.wrappedUrlToImage, width: 100, height: 100)
                 Spacer()
             }
                 
