@@ -8,9 +8,31 @@
 
 import Foundation
 
-struct Article: Identifiable {
-    let id = UUID()
-    let publisher: String
-    let title: String
-    let imgPath: String
+struct Source: Codable {
+    let name: String
 }
+
+struct Article: Identifiable, Codable {
+    let id = UUID()
+    let source: Source
+    let author: String?
+    let title: String
+    let description: String
+    let url: String
+    let urlToImage: String?
+//    let publishedAt: Date
+    
+    var wrappedAuthor: String {
+        return author ?? "Unknown Author"
+    }
+    
+    var wrappedUrlToImage: String {
+        return urlToImage ?? ""
+    }
+}
+
+struct Response: Codable {
+    let totalResults: Int
+    let articles: [Article]
+}
+

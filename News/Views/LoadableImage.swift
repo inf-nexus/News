@@ -11,30 +11,27 @@ import SwiftUI
 struct LoadableImage: View {
     
     let imageURLString: String
-    @State var data = Data()
+    
+    @State var loadedImage: Image?
     
     var body: some View {
-        if data.isEmpty {
+        
+        if loadedImage == nil {
             return AnyView(Image(systemName: "photo")
-            .resizable()
-            .onAppear(perform: loadImage))
+                .resizable()
+                .onAppear(perform: loadImage))
+        } else {
+            return AnyView(loadedImage)
         }
-        return AnyView(Image(uiImage: UIImage(data: data)!)
-            .resizable()
-            )
+        
     }
     
     func loadImage() {
         
-        simpleURLRequest(urlString: imageURLString) { data, error in
-            if data != nil {
-                guard let data = data as? Data else { return }
-                self.data = data
-                
-            } else {
-                print("Error fetching image: ", error?.localizedDescription ?? "Unknown error")
-            }
+        fetchImage(urlString: imageURLString) { loadedImage in
+            self.loadedImage = loadedImage
         }
+    
     }
 }
 

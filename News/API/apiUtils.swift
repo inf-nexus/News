@@ -7,19 +7,52 @@
 //
 
 import Foundation
+import SwiftUI
+import UIKit
 
-func simpleURLRequest(urlString: String, callback: @escaping (Any?, Error?) -> Void) {
+let API_KEY = ""
+
+func fetchImage(urlString: String, callback: @escaping (Image) -> Void) {
     
-    guard let url = URL(string: urlString) else { return }
+    let fallbackImage = Image(systemName: "photo")
+    
+    guard let url = URL(string: urlString) else {
+        callback(fallbackImage)
+        return
+    }
+    
     URLSession.shared.dataTask(with: url) { data, response, error in
         
         DispatchQueue.main.async {
             if let data = data {
-                callback(data, nil)
+                callback(Image(uiImage: UIImage(data: data)!))
             } else {
-                callback(nil, error)
+                print("Failed to retrieve image data with error: ", error?.localizedDescription ?? "Unknown error")
+                callback(fallbackImage)
             }
         }
-    }.resume()
+        
+    }
+}
+
+func fetchHeadlineArticles(callback: @escaping ([Article]) -> Void) {
     
+    let urlString = "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(API_KEY)"
+    
+    guard let url = URL(string: urlString) else {
+        callback([])
+        return
+    }
+    
+    URLSession.shared.dataTask(with: url) { data, response, error in
+        DispatchQueue.main.async {
+            if let data = data {
+                let articles = decodeArticles(data: data)
+                callback(articles)
+            } else {
+                print("Failed to retrieve articles with error: ", error?.localizedDescription ?? "Unknown Error")
+                callback([])
+            }
+        }
+    }
 }
