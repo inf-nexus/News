@@ -25,7 +25,7 @@ struct HomeView: View {
                             ArticleCell(article: article)
                         }.onAppear(perform: {
                             if article.id == self.articles.last!.id {
-                                
+                                self.loadArticles()
                             }
                             
                         })
