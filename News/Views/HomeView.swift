@@ -21,13 +21,13 @@ struct HomeView: View {
                 List {
                     
                     ForEach(self.articles) { article in
-                        
-                        NavigationLink(destination: WebView(urlString: article.url) ) {
+                        NavigationLink(destination: WebView(urlString: article.url).edgesIgnoringSafeArea(.all) ) {
                             ArticleCell(article: article)
                         }.onAppear(perform: {
                             if article.id == self.articles.last!.id {
-                                self.loadArticles()
+                                
                             }
+                            
                         })
                     }
                     
@@ -37,10 +37,10 @@ struct HomeView: View {
                             .bold()
                         Spacer()
                     }
-
+                    
                 }
                 
-            
+                
             }
             .navigationBarTitle(Text("News"))
         }
