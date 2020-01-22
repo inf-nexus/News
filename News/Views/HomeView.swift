@@ -24,7 +24,11 @@ struct HomeView: View {
                         
                         NavigationLink(destination: WebView(urlString: article.url) ) {
                             ArticleCell(article: article)
-                        }
+                        }.onAppear(perform: {
+                            if article.id == self.articles.last!.id {
+                                self.loadArticles()
+                            }
+                        })
                     }
                     
                     HStack() {
@@ -45,9 +49,10 @@ struct HomeView: View {
     
     func loadArticles() {
         NewsApi.shared.fetchHeadlineArticles { articles in
-            self.articles = articles
+            self.articles.append(contentsOf: articles)
         }
     }
+    
 }
 
 struct HomeView_Previews: PreviewProvider {

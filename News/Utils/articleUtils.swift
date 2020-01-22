@@ -20,17 +20,15 @@ func decodeArticleJSONString(jsonString: String) -> Article? {
     return article
 }
 
-func decodeArticles(data: Data) -> [Article] {
+func decodeResponse(data: Data) -> Response? {
     
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
     
     guard let response = try? decoder.decode(Response.self, from: data) else {
         print("Failed to decode articles")
-        return []
+        return nil
     }
     
-    let articles = response.articles
-    
-    return articles
+    return response
 }

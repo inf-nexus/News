@@ -20,6 +20,7 @@
 		743D55D823BE5D5200F72B17 /* LoadableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743D55D723BE5D5200F72B17 /* LoadableImage.swift */; };
 		745EAA6923D7FE8A0014C7C1 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745EAA6823D7FE8A0014C7C1 /* WebView.swift */; };
 		748B11BE23BEC1D900682AF7 /* apiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748B11BD23BEC1D900682AF7 /* apiUtils.swift */; };
+		74F5F2F423D8E0DD00B05E71 /* RequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F5F2F323D8E0DD00B05E71 /* RequestHelper.swift */; };
 		74FC67B923D6B355009D992E /* articleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FC67B823D6B355009D992E /* articleUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		743D55D723BE5D5200F72B17 /* LoadableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableImage.swift; sourceTree = "<group>"; };
 		745EAA6823D7FE8A0014C7C1 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		748B11BD23BEC1D900682AF7 /* apiUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiUtils.swift; sourceTree = "<group>"; };
+		74F5F2F323D8E0DD00B05E71 /* RequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHelper.swift; sourceTree = "<group>"; };
 		74FC67B823D6B355009D992E /* articleUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = articleUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				7407878823BD157F008FF17E /* Article.swift */,
+				74F5F2F323D8E0DD00B05E71 /* RequestHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				74FC67B923D6B355009D992E /* articleUtils.swift in Sources */,
 				7407876E23BD139D008FF17E /* AppDelegate.swift in Sources */,
 				7407878B23BD16F0008FF17E /* HomeView.swift in Sources */,
+				74F5F2F423D8E0DD00B05E71 /* RequestHelper.swift in Sources */,
 				748B11BE23BEC1D900682AF7 /* apiUtils.swift in Sources */,
 				7407877323BD139D008FF17E /* News.xcdatamodeld in Sources */,
 				7407878923BD157F008FF17E /* Article.swift in Sources */,
