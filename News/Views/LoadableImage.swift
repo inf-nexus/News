@@ -41,7 +41,7 @@ struct LoadableImage: View {
     
     func loadImage() {
         
-        fetchImage(urlString: imageURLString) { loadedImage in
+        NewsApi.shared.fetchImage(urlString: imageURLString) { loadedImage in
             self.loadedImage = loadedImage
         }
     

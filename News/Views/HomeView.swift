@@ -44,7 +44,7 @@ struct HomeView: View {
     }
     
     func loadArticles() {
-        fetchHeadlineArticles { articles in
+        NewsApi.shared.fetchHeadlineArticles { articles in
             self.articles = articles
         }
     }
