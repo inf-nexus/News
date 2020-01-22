@@ -21,7 +21,10 @@ struct HomeView: View {
                 List {
                     
                     ForEach(self.articles) { article in
-                        ArticleCell(article: article)
+                        
+                        NavigationLink(destination: WebView(urlString: article.url) ) {
+                            ArticleCell(article: article)
+                        }
                     }
                     
                     HStack() {
