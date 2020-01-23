@@ -6,6 +6,10 @@ Basic news app built using SwiftUI. Powered by News API
 </p>
 
 <p align="center">
+    <img src="https://github.com/inf-nexus/News/blob/master/screenshots/News_App_Webview.png" width="360" height="640" />
+</p>
+
+<p align="center">
     <img src="https://github.com/inf-nexus/News/blob/master/screenshots/News_App_Search.png" width="360" height="640" />
 </p>
 

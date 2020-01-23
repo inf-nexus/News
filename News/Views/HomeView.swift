@@ -11,6 +11,8 @@ import SwiftUI
 struct HomeView: View {
     
     @State var articles = [Article]()
+    @State var selectedURLString: String?
+    @State var showingWebView = false
     
     var body: some View {
         
@@ -21,14 +23,18 @@ struct HomeView: View {
                 List {
                     
                     ForEach(self.articles) { article in
-                        NavigationLink(destination: WebView(urlString: article.url).edgesIgnoringSafeArea(.all) ) {
-                            ArticleCell(article: article)
-                        }.onAppear(perform: {
-                            if article.id == self.articles.last!.id {
-                                self.loadArticles()
-                            }
-                            
-                        })
+        
+                        ArticleCell(article: article)
+                            .onAppear(perform: {
+                                if article.id == self.articles.last!.id {
+                                    self.loadArticles()
+                                }
+                                
+                            })
+                            .onTapGesture {
+                                self.selectedURLString = article.url
+                                self.showingWebView = true
+                        }
                     }
                     
                     HStack() {
@@ -38,6 +44,9 @@ struct HomeView: View {
                         Spacer()
                     }
                     
+                }.sheet(isPresented: $showingWebView, onDismiss: { self.selectedURLString = nil }) {
+                    WebView(urlString: self.selectedURLString!)
+                        .edgesIgnoringSafeArea(.all)
                 }
                 
                 

@@ -16,13 +16,13 @@ struct ContentView: View {
             HomeView().tabItem {
                 Image(systemName: "house")
                 Text("Home")
-            }
+            }.navigationBarHidden(true)
             
-            SearchView().tabItem {
+            SearchView()
+                .tabItem {
                 Image(systemName: "magnifyingglass")
                 Text("Search")
             }
-            
             
         }
         
