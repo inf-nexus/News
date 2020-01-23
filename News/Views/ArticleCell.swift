@@ -16,7 +16,7 @@ struct ArticleCell: View {
         
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 0) {
-                Text(article.source.name)
+                Text(article.source.wrappedName)
                     .font(.title)
                     .foregroundColor(.gray)
                 Text(article.title)

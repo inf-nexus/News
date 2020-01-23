@@ -12,7 +12,6 @@ import UIKit
 
 let API_KEY = ""
 
-
 class NewsApi {
     
     let imageCache: NSCache<NSString, UIImage>
@@ -32,7 +31,7 @@ class NewsApi {
         requestHelper.status = .loading
 
         let urlString = "https://newsapi.org/v2/top-headlines?country=us&pageSize=\(requestHelper.pageSize)&page=\(requestHelper.page)&apiKey=\(API_KEY)"
-        
+                
         guard let url = URL(string: urlString) else {
             requestHelper.status = .failed
             callback([])

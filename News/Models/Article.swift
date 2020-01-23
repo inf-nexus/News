@@ -9,7 +9,10 @@
 import Foundation
 
 struct Source: Codable {
-    let name: String
+    let name: String?
+    var wrappedName: String {
+        return name ?? "Unknown Source"
+    }
 }
 
 struct Article: Identifiable, Codable {
@@ -17,10 +20,10 @@ struct Article: Identifiable, Codable {
     let source: Source
     let author: String?
     let title: String
-    let description: String
+    let description: String?
     let url: String
     let urlToImage: String?
-    let publishedAt: Date
+    let publishedAt: Date?
     
     var wrappedAuthor: String {
         return author ?? "Unknown Author"
