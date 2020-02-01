@@ -11,7 +11,7 @@ import Foundation
 struct Source: Codable {
     let name: String?
     var wrappedName: String {
-        return name ?? "Unknown Source"
+        return name?.components(separatedBy: ".").first ?? "Unknown Source"
     }
 }
 
@@ -32,6 +32,7 @@ struct Article: Identifiable, Codable {
     var wrappedUrlToImage: String {
         return urlToImage ?? ""
     }
+    
 }
 
 struct Response: Codable {

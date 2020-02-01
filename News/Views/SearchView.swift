@@ -7,10 +7,27 @@
 //
 
 import SwiftUI
+import Combine
+
+class QueryWrapper: ObservableObject {
+    
+    var fetchArticles: ((String, Bool) -> Void)?
+
+    private var cancellable: AnyCancellable?
+    @Published var searchQuery = ""
+    
+    init() {
+            
+        cancellable = $searchQuery.removeDuplicates().debounce(for: .milliseconds(400), scheduler: DispatchQueue.main).sink { searchVal in
+            self.fetchArticles?(searchVal, false)
+        }
+    }
+    
+}
 
 struct SearchBar: View {
     
-    @Binding var query: String
+    @ObservedObject var queryWrapper: QueryWrapper
     
     let lightGrayColor = Color(red: 229/255, green: 229/255, blue: 234/255)
     
@@ -19,7 +36,7 @@ struct SearchBar: View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(Color.gray)
-            TextField("Search", text: $query)
+            TextField("Search", text: $queryWrapper.searchQuery)
                 .padding(.leading, 5)
         }
         .padding(10)
@@ -27,13 +44,16 @@ struct SearchBar: View {
         .padding()
         
     }
-    
+
 }
 
 struct SearchView: View {
     
-    @State var searchQuery = ""
+    @ObservedObject var queryWrapper = QueryWrapper()
+    
     @State var articles = [Article]()
+    @State var selectedURLString: String?
+    @State var showingWebView = false
     
     var body: some View {
         
@@ -41,22 +61,54 @@ struct SearchView: View {
             
             VStack {
                 
-                SearchBar(query: $searchQuery)
+                SearchBar(queryWrapper: queryWrapper)
                 
                 List {
                     
                     ForEach(articles) { article in
                         ArticleCell(article: article)
+                        .onAppear(perform: {
+                                if article.id == self.articles.last!.id {
+                                    self.fetchArticles(query: self.queryWrapper.searchQuery, shouldAppend: true)
+                                }
+                                
+                            })
+                            .onTapGesture {
+                                self.selectedURLString = article.url
+                                self.showingWebView = true
+                        }
                     }
                     
                 }
                 
             }
             .navigationBarTitle("Search")
+            .onAppear(perform: { self.queryWrapper.fetchArticles = self.fetchArticles })
+            .sheet(isPresented: $showingWebView, onDismiss: { self.selectedURLString = nil }) {
+                WebView(urlString: self.selectedURLString!)
+                    .edgesIgnoringSafeArea(.all)
+            }
             
         }
         
     }
+    
+    func fetchArticles(query: String, shouldAppend: Bool) {
+        
+        NewsApi.shared.fetchQueriedArticles(query: query) { articles in
+            if shouldAppend {
+                self.articles.append(contentsOf: articles)
+            } else {
+                 self.articles = articles
+            }
+           
+        }
+        
+    }
+    
+    
+    
+
 }
 
 struct SearchView_Previews: PreviewProvider {
