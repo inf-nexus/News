@@ -49,11 +49,15 @@ struct SearchBar: View {
 
 struct SearchView: View {
     
+    @EnvironmentObject var articleContainer: ArticleContainer
+    
     @ObservedObject var queryWrapper = QueryWrapper()
     
     @State var articles = [Article]()
     @State var selectedURLString: String?
     @State var showingWebView = false
+    @State var showingActionSheet = false
+    @State var articleToSave: Article?
     
     var body: some View {
         
@@ -76,6 +80,19 @@ struct SearchView: View {
                             .onTapGesture {
                                 self.selectedURLString = article.url
                                 self.showingWebView = true
+                        }
+                        .onLongPressGesture {
+                            self.showingActionSheet = true
+                            self.articleToSave = article
+                        }
+                        .actionSheet(isPresented: self.$showingActionSheet) {
+                            ActionSheet(title: Text("Save article?"), buttons: [
+                                .default(Text("Save")) {
+                                    self.articleContainer.saveArticle(article: self.articleToSave!)
+                                    self.articleToSave = nil
+                                },
+                                .cancel()
+                            ])
                         }
                     }
                     

@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var articleContainer = ArticleContainer()
+    
     var body: some View {
         
         TabView {
@@ -24,10 +27,14 @@ struct ContentView: View {
                 Text("Search")
             }
             
+            SavedArticlesView()
+                .tabItem {
+                    Image(systemName: "folder")
+                Text("Saved")
+            }
+            
         }
-        
-        
-       
+        .environmentObject(articleContainer)
     }
 }
 
